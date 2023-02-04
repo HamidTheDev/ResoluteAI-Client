@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Usercontext } from '../components/Authprovider/Authprovider';
 
 const Header = () => {
+  const { loader, user, auth } = useContext(Usercontext);
   return (
     <div className="flex items-center justify-between container mx-auto pt-6 pb-20">
       <div>
@@ -8,7 +10,7 @@ const Header = () => {
       </div>
       <div className='py-4 rounded-md px-14 shadow'>
         <i class="fa-regular fa-user pr-5 text-xl text-black"></i>
-        <span className="text-black">useremail@gmail.com</span>
+        <span className="text-black">{user?.email}</span>
       </div>
     </div>
   );

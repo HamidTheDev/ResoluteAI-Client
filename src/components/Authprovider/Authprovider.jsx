@@ -1,16 +1,17 @@
 import React from "react";
 import { createContext } from "react";
-import { app } from "../Authprovider/firebase.init";
 import {
-  getAuth,
+
   signInWithPopup,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  getAuth,
 } from "firebase/auth";
 import { useState } from "react";
 import { useEffect } from "react";
+import { app } from "./firebase.init";
 
 export const Usercontext = createContext(app);
 
@@ -21,19 +22,12 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 const Authprovider = ({ children }) => {
-  var [cart, setCart] = useState(0);
 
   const [user, setUser] = useState(null);
 
   const [loader, setloader] = useState(true);
 
-  const [id, setId] = useState('')
 
-  //google signup
-  const google = () => {
-    setloader(true);
-    return signInWithPopup(auth, provider);
-  };
 
   //manual
   const manual = (email, password, displayName) => {
@@ -58,13 +52,9 @@ const Authprovider = ({ children }) => {
   const authinfo = {
     user,
     auth,
-    google,
     manual,
     signin,
     loader,
-    cart,
-    setCart,
-    setId,
   };
 
   return (
